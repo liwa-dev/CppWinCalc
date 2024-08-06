@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Windows C++ CI
 
 on:
   push:
@@ -8,16 +8,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4
     
-    - name: Install g++
-      run: sudo apt-get install -y g++
-    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Setup Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1
+
     - name: Compile
-      run: g++ -o P1 P1.cpp
-    
+      run: cl.exe /EHsc P1.cpp /Fe:P1.exe
+
     - name: Run
-      run: ./P1
+      run: .\P1.exe
