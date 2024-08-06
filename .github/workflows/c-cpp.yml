@@ -24,3 +24,4 @@ jobs:
 
     - name: Run
       run: .\P1.exe
+      timeout-minutes: 1
